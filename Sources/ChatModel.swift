@@ -1,5 +1,18 @@
 import Foundation
 
+struct ChatListState {
+
+    var text = ""
+    var messages: [Message] = [
+        .init(
+            sender: "A I", text: "Hello there! how may i assist you?",
+            role: .assistant, state: .idle)
+    ]
+    var task: Task<Void, Never>?
+    var isPrompting = false
+
+}
+
 enum MessageState {
     case loading, error, idle
 }

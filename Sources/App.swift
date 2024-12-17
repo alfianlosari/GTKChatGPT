@@ -2,31 +2,24 @@ import Adwaita
 import ChatGPTSwift
 import Foundation
 import Logging
-import Observation
 import WSClient
 
 @main struct AdwaitaTemplate: App, @unchecked Sendable {
 
     var app = AdwaitaApp(id: "io.github.AparokshaUI.Demo")
 
-    @State var chatGPTAPI = ChatGPTAPI(
+    @State var chatState = ChatListState()
+
+    static let chatGPTAPI = ChatGPTAPI(
         apiKey:
             "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"
     )
-    @State var text = ""
-    @State var messages: [Message] = [
-        .init(
-            sender: "A I", text: "Hello there! how may i assist you?",
-            role: .assistant, state: .idle)
-    ]
-    @State var task: Task<Void, Never>?
-    @State var isPrompting = false
 
     var scene: Scene {
         Window(id: "content") { _ in
             VStack {
                 ScrollView {
-                    ForEach(messages) { message in
+                    ForEach(chatState.messages) { message in
                         HStack {
                             Avatar(showInitials: true, size: 20)
                                 .text(message.sender)
@@ -46,13 +39,14 @@ import WSClient
 
                                 if message.state == .loading {
                                     Spinner()
+                                        .padding(8, .vertical)
                                 }
 
                                 if message.state == .error {
                                     Button("Retry") {
                                         self.retry(message: message)
                                     }
-                                    .insensitive(isPrompting)
+                                    .insensitive(chatState.isPrompting)
                                     .frame(maxWidth: 100)
                                     .padding(16, .horizontal)
                                     .padding(8, .vertical)
@@ -69,44 +63,44 @@ import WSClient
                 .vexpand()
 
                 HStack {
-                    EntryRow("Enter message to send", text: $text)
+                    EntryRow("Enter message to send", text: $chatState.text)
                         .onSubmit {
-                            let text = self.text
+                            let text = self.chatState.text
                             guard !text.isEmpty else { return }
-                            self.text = ""
+                            self.chatState.text = ""
                             self.sendMessage(text: text)
                         }
                         .hexpand()
-                        .insensitive(isPrompting)
+                        .insensitive(chatState.isPrompting)
                         .padding(8, .trailing)
 
-                    if task != nil {
+                    if chatState.task != nil {
                         Button("Cancel") {
-                            self.task?.cancel()
-                            self.task = nil
+                            self.chatState.task?.cancel()
+                            self.chatState.task = nil
                         }
                         .style("destructive-action")
                     } else {
                         HStack {
                             Button("Clear") {
-                                self.messages.removeAll()
-                                self.messages.append(
+                                self.chatState.messages.removeAll()
+                                self.chatState.messages.append(
                                     .init(
                                         sender: "A I", text: "Hello there! how may i assist you?",
                                         role: .assistant, state: .idle))
                             }
                             .style("destructive-action")
                             .padding(8, .trailing)
-                            .insensitive(isPrompting)
+                            .insensitive(chatState.isPrompting)
 
                             Button("Send") {
-                                let text = self.text
+                                let text = self.chatState.text
                                 guard !text.isEmpty else { return }
-                                self.text = ""
+                                self.chatState.text = ""
                                 self.sendMessage(text: text)
                             }
                             .style("suggested-action")
-                            .insensitive(isPrompting)
+                            .insensitive(chatState.isPrompting)
                         }
                     }
                 }
@@ -125,37 +119,37 @@ import WSClient
     }
 
     func sendMessage(text: String) {
-        self.task = Task {
+        self.chatState.task = Task {
             do {
                 Idle {
-                    self.messages.append(
+                    self.chatState.messages.append(
                         .init(sender: "A L", text: text, role: .user, state: .idle))
-                    self.messages.append(
+                    self.chatState.messages.append(
                         .init(sender: "A I", text: "", role: .assistant, state: .loading))
-                    self.isPrompting = true
+                    self.chatState.isPrompting = true
                 }
 
-                let stream = try await self.chatGPTAPI.sendMessageStream(text: text)
+                let stream = try await Self.chatGPTAPI.sendMessageStream(text: text)
                 var responseText = ""
                 for try await text in stream {
                     try Task.checkCancellation()
                     Idle {
                         responseText += text
-                        if var message = self.messages.last {
+                        if var message = self.chatState.messages.last {
                             message.text = responseText
-                            self.messages[self.messages.count - 1] = message
+                            self.chatState.messages[self.chatState.messages.count - 1] = message
                         }
                     }
                 }
                 try Task.checkCancellation()
                 Idle {
-                    if var message = self.messages.last {
+                    if var message = self.chatState.messages.last {
                         message.text = responseText
                         message.state = .idle
-                        self.messages[self.messages.count - 1] = message
-                        self.task = nil
-                        self.isPrompting = false
-                        self.chatGPTAPI.appendToHistoryList(
+                        self.chatState.messages[self.chatState.messages.count - 1] = message
+                        self.chatState.task = nil
+                        self.chatState.isPrompting = false
+                        Self.chatGPTAPI.appendToHistoryList(
                             userText: text, responseText: responseText)
 
                     }
@@ -163,7 +157,7 @@ import WSClient
                 }
 
             } catch {
-                if var message = self.messages.last {
+                if var message = self.chatState.messages.last {
                     Idle {
                         if error is CancellationError {
                             message.text += "\n\nCancelled"
@@ -171,9 +165,9 @@ import WSClient
                             message.text += "\n\nError:\n\(error.localizedDescription)"
                         }
                         message.state = .error
-                        self.messages[self.messages.count - 1] = message
-                        self.task = nil
-                        self.isPrompting = false
+                        self.chatState.messages[self.chatState.messages.count - 1] = message
+                        self.chatState.task = nil
+                        self.chatState.isPrompting = false
                     }
                 }
                 print(error.localizedDescription)
@@ -182,13 +176,13 @@ import WSClient
     }
 
     func retry(message: Message) {
-        guard let index = self.messages.firstIndex(where: { $0.id == message.id }) else {
+        guard let index = self.chatState.messages.firstIndex(where: { $0.id == message.id }) else {
             return
         }
         Idle {
-            let promptMessage = self.messages[index - 1]
-            self.messages.remove(at: index)
-            self.messages.remove(at: index - 1)
+            let promptMessage = self.chatState.messages[index - 1]
+            self.chatState.messages.remove(at: index)
+            self.chatState.messages.remove(at: index - 1)
             self.sendMessage(text: promptMessage.text)
         }
     }
