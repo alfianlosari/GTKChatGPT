@@ -9,6 +9,7 @@ import WSClient
     var app = AdwaitaApp(id: "io.github.AparokshaUI.Demo")
 
     @State var chatState = ChatListState()
+    nonisolated(unsafe) static var scrollView: CustomScrollView?
 
     static let chatGPTAPI = ChatGPTAPI(
         apiKey:
@@ -18,7 +19,7 @@ import WSClient
     var scene: Scene {
         Window(id: "content") { _ in
             VStack {
-                ScrollView {
+                CustomScrollView { scrollView in
                     ForEach(chatState.messages) { message in
                         HStack {
                             Avatar(showInitials: true, size: 20)
@@ -59,12 +60,16 @@ import WSClient
                         .style("card")
                     }
                 }
+                .modify { scrollView in
+                    Self.scrollView = scrollView
+                }
                 .kineticScrolling()
+                .propagateNaturalHeight()
                 .vexpand()
 
                 HStack {
                     EntryRow("Enter message to send", text: $chatState.text)
-                        .onSubmit {
+                        .entryActivated {
                             let text = self.chatState.text
                             guard !text.isEmpty else { return }
                             self.chatState.text = ""
@@ -94,6 +99,7 @@ import WSClient
                             .insensitive(chatState.isPrompting)
 
                             Button("Send") {
+
                                 let text = self.chatState.text
                                 guard !text.isEmpty else { return }
                                 self.chatState.text = ""
@@ -119,6 +125,7 @@ import WSClient
     }
 
     func sendMessage(text: String) {
+
         self.chatState.task = Task {
             do {
                 Idle {
@@ -138,6 +145,7 @@ import WSClient
                         if var message = self.chatState.messages.last {
                             message.text = responseText
                             self.chatState.messages[self.chatState.messages.count - 1] = message
+                            Self.scrollView?.scrollToBottom()
                         }
                     }
                 }
@@ -184,6 +192,7 @@ import WSClient
             self.chatState.messages.remove(at: index)
             self.chatState.messages.remove(at: index - 1)
             self.sendMessage(text: promptMessage.text)
+
         }
     }
 
