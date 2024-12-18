@@ -83,7 +83,7 @@ import LevenshteinTransformations
 /// Until GTK 4.10, `GtkScrolledWindow` used the `GTK_ACCESSIBLE_ROLE_GROUP` role.
 ///
 /// Starting from GTK 4.12, `GtkScrolledWindow` uses the `GTK_ACCESSIBLE_ROLE_GENERIC` role.
-public struct CustomScrollView: AdwaitaWidget {
+public struct ChatListScrollView: AdwaitaWidget {
 
     /// Additional update functions for type extensions.
     var updateFunctions: [(ViewStorage, WidgetData, Bool) -> Void] = []
@@ -101,7 +101,7 @@ public struct CustomScrollView: AdwaitaWidget {
     /// When setting this property, if the child widget does not implement
     /// [iface@Gtk.Scrollable], the scrolled window will add the child to
     /// a [class@Gtk.Viewport] and then set the viewport as the child.
-    var child: ((CustomScrollView) -> Body)?
+    var child: ((ChatListScrollView) -> Body)?
     /// Whether to draw a frame around the contents.
     var hasFrame: Bool?
     /// When the horizontal scrollbar is displayed.
@@ -190,7 +190,7 @@ public struct CustomScrollView: AdwaitaWidget {
 
     /// Initialize a `ScrollView`.
     /// - Parameter content: The view content.
-    public init(@ViewBuilder content: @escaping (CustomScrollView) -> Body) {
+    public init(@ViewBuilder content: @escaping (ChatListScrollView) -> Body) {
         self.init()
         self = self.child(content)
     }
@@ -354,7 +354,7 @@ public struct CustomScrollView: AdwaitaWidget {
     /// When setting this property, if the child widget does not implement
     /// [iface@Gtk.Scrollable], the scrolled window will add the child to
     /// a [class@Gtk.Viewport] and then set the viewport as the child.
-    public func child(@ViewBuilder _ child: @escaping ((CustomScrollView) -> Body)) -> Self {
+    public func child(@ViewBuilder _ child: @escaping ((ChatListScrollView) -> Body)) -> Self {
         var newSelf = self
         newSelf.child = child
         return newSelf

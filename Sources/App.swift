@@ -1,15 +1,13 @@
 import Adwaita
 import ChatGPTSwift
 import Foundation
-import Logging
-import WSClient
 
 @main struct AdwaitaTemplate: App, @unchecked Sendable {
 
-    var app = AdwaitaApp(id: "io.github.AparokshaUI.Demo")
+    var app = AdwaitaApp(id: "com.alfianlosari.xca-gtk-chatgpt")
 
     @State var chatState = ChatListState()
-    nonisolated(unsafe) static var scrollView: CustomScrollView?
+    nonisolated(unsafe) static var chatListScrollView: ChatListScrollView?
 
     static let chatGPTAPI = ChatGPTAPI(
         apiKey:
@@ -19,7 +17,7 @@ import WSClient
     var scene: Scene {
         Window(id: "content") { _ in
             VStack {
-                CustomScrollView { scrollView in
+                ChatListScrollView { _ in
                     ForEach(chatState.messages) { message in
                         HStack {
                             Avatar(showInitials: true, size: 20)
@@ -61,7 +59,7 @@ import WSClient
                     }
                 }
                 .modify { scrollView in
-                    Self.scrollView = scrollView
+                    Self.chatListScrollView = scrollView
                 }
                 .kineticScrolling()
                 .propagateNaturalHeight()
@@ -121,21 +119,18 @@ import WSClient
         .closeShortcut()
         .defaultSize(width: 400, height: 250)
         .title("XCA GTK ChatGPT ")
-
     }
 
     func sendMessage(text: String) {
+        self.chatState.messages.append(
+            .init(sender: "A L", text: text, role: .user, state: .idle))
+        self.chatState.messages.append(
+            .init(sender: "A I", text: "", role: .assistant, state: .loading))
+        self.chatState.isPrompting = true
+        self.scrollToBottom()
 
         self.chatState.task = Task {
             do {
-                Idle {
-                    self.chatState.messages.append(
-                        .init(sender: "A L", text: text, role: .user, state: .idle))
-                    self.chatState.messages.append(
-                        .init(sender: "A I", text: "", role: .assistant, state: .loading))
-                    self.chatState.isPrompting = true
-                }
-
                 let stream = try await Self.chatGPTAPI.sendMessageStream(text: text)
                 var responseText = ""
                 for try await text in stream {
@@ -145,7 +140,7 @@ import WSClient
                         if var message = self.chatState.messages.last {
                             message.text = responseText
                             self.chatState.messages[self.chatState.messages.count - 1] = message
-                            Self.scrollView?.scrollToBottom()
+                            self.scrollToBottom()
                         }
                     }
                 }
@@ -157,13 +152,11 @@ import WSClient
                         self.chatState.messages[self.chatState.messages.count - 1] = message
                         self.chatState.task = nil
                         self.chatState.isPrompting = false
+                        self.scrollToBottom()
                         Self.chatGPTAPI.appendToHistoryList(
                             userText: text, responseText: responseText)
-
                     }
-
                 }
-
             } catch {
                 if var message = self.chatState.messages.last {
                     Idle {
@@ -176,6 +169,7 @@ import WSClient
                         self.chatState.messages[self.chatState.messages.count - 1] = message
                         self.chatState.task = nil
                         self.chatState.isPrompting = false
+                        self.scrollToBottom()
                     }
                 }
                 print(error.localizedDescription)
@@ -192,28 +186,10 @@ import WSClient
             self.chatState.messages.remove(at: index)
             self.chatState.messages.remove(at: index - 1)
             self.sendMessage(text: promptMessage.text)
-
         }
     }
 
+    func scrollToBottom() {
+        Self.chatListScrollView?.scrollToBottom()
+    }
 }
-
-// Task {
-
-//     do {
-//         try await WebSocketClient.connect(
-//             url: "wss://ws.coincap.io/prices?assets=bitcoin,ethereum,dogecoin",
-//             logger: Logger(label: "xca.cryptotracker")
-//         ) { inbound, outbound, context in
-//             // you can convert the inbound stream of frames into a stream of full messages using `messages(maxSize:)`
-
-//             for try await frame in inbound.messages(maxSize: 8_388_608) {
-//                 print(frame)
-//             }
-//         }
-//     } catch {
-//         print("\(error)")
-//     }
-// }
-
-// RunLoop.main.run(until: .distantFuture)

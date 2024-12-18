@@ -1,5 +1,5 @@
 {
-  "originHash" : "d2e7bdd6dde32d9a4710d98d6dccac6b87e8c533fd4dfc65d19a33c7e751618d",
+  "originHash" : "0b2278b400728a406baedf5b6120e50e3311d72d206c22c2406ab54f87b2bb71",
   "pins" : [
     {
       "identity" : "adwaita-swift",
@@ -26,15 +26,6 @@
       "state" : {
         "revision" : "3b2f2b6fe2ac38d4bfbcaeed8a637f22f51631b6",
         "version" : "2.3.3"
-      }
-    },
-    {
-      "identity" : "compress-nio",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/adam-fowler/compress-nio.git",
-      "state" : {
-        "revision" : "459a803a4e38718d94d64f2b31e83f01d934f324",
-        "version" : "1.4.0"
       }
     },
     {
@@ -101,15 +92,6 @@
       }
     },
     {
-      "identity" : "swift-async-algorithms",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/apple/swift-async-algorithms.git",
-      "state" : {
-        "revision" : "4c3ea81f81f0a25d0470188459c6d4bf20cf2f97",
-        "version" : "1.0.3"
-      }
-    },
-    {
       "identity" : "swift-atomics",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-atomics.git",
@@ -121,7 +103,7 @@
     {
       "identity" : "swift-collections",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/apple/swift-collections.git",
+      "location" : "https://github.com/apple/swift-collections",
       "state" : {
         "revision" : "671108c96644956dddcd89dd59c203dcdb36cec7",
         "version" : "1.1.4"
@@ -148,7 +130,7 @@
     {
       "identity" : "swift-nio",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/apple/swift-nio.git",
+      "location" : "https://github.com/apple/swift-nio",
       "state" : {
         "revision" : "dca6594f65308c761a9c409e09fbf35f48d50d34",
         "version" : "2.77.0"
@@ -168,8 +150,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-nio-http2.git",
       "state" : {
-        "revision" : "eaa71bb6ae082eee5a07407b1ad0cbd8f48f9dca",
-        "version" : "1.34.1"
+        "revision" : "170f4ca06b6a9c57b811293cebcb96e81b661310",
+        "version" : "1.35.0"
       }
     },
     {
@@ -204,8 +186,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/swift-server/swift-openapi-async-http-client",
       "state" : {
-        "revision" : "abfe558a66992ef1e896a577010f957915f30591",
-        "version" : "1.0.0"
+        "revision" : "915aeff168625b0f88a5810ee7ab8e9c00af671b",
+        "version" : "1.1.0"
       }
     },
     {
@@ -227,30 +209,12 @@
       }
     },
     {
-      "identity" : "swift-service-lifecycle",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/swift-server/swift-service-lifecycle",
-      "state" : {
-        "revision" : "f70b838872863396a25694d8b19fe58bcd0b7903",
-        "version" : "2.6.2"
-      }
-    },
-    {
       "identity" : "swift-system",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-system.git",
       "state" : {
         "revision" : "c8a44d836fe7913603e246acab7c528c2e780168",
         "version" : "1.4.0"
-      }
-    },
-    {
-      "identity" : "swift-websocket",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/hummingbird-project/swift-websocket",
-      "state" : {
-        "revision" : "342a5799b0b934681c255e2f36233b3ce16822c0",
-        "version" : "1.1.1"
       }
     }
   ],

@@ -4,19 +4,37 @@
             "type": "lldb",
             "request": "launch",
             "args": [],
-            "cwd": "${workspaceFolder:swift_websocket}",
-            "name": "Debug swift_websocket",
-            "program": "${workspaceFolder:swift_websocket}/.build/debug/swift_websocket",
-            "preLaunchTask": "swift: Build Debug swift_websocket"
+            "cwd": "${workspaceFolder:xca-gtk-chatgpt}",
+            "name": "Debug xca-gtk-chatgpt",
+            "program": "${workspaceFolder:xca-gtk-chatgpt}/.build/debug/xca-gtk-chatgpt",
+            "preLaunchTask": "swift: Build Debug xca-gtk-chatgpt"
         },
         {
             "type": "lldb",
             "request": "launch",
             "args": [],
-            "cwd": "${workspaceFolder:swift_websocket}",
-            "name": "Release swift_websocket",
-            "program": "${workspaceFolder:swift_websocket}/.build/release/swift_websocket",
-            "preLaunchTask": "swift: Build Release swift_websocket"
+            "cwd": "${workspaceFolder:xca-gtk-chatgpt}",
+            "name": "Release xca-gtk-chatgpt",
+            "program": "${workspaceFolder:xca-gtk-chatgpt}/.build/release/xca-gtk-chatgpt",
+            "preLaunchTask": "swift: Build Release xca-gtk-chatgpt"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:xca-gtk-chatgpt}",
+            "name": "Debug XCAChatGPT",
+            "program": "${workspaceFolder:xca-gtk-chatgpt}/.build/debug/XCAChatGPT",
+            "preLaunchTask": "swift: Build Debug XCAChatGPT"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:xca-gtk-chatgpt}",
+            "name": "Release XCAChatGPT",
+            "program": "${workspaceFolder:xca-gtk-chatgpt}/.build/release/XCAChatGPT",
+            "preLaunchTask": "swift: Build Release XCAChatGPT"
         }
     ]
 }
