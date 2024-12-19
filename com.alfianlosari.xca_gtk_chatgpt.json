@@ -1,0 +1,62 @@
+{
+    "app-id": "com.alfianlosari.xca_gtk_chatgpt",
+    "runtime": "org.gnome.Platform",
+    "runtime-version": "46",
+    "sdk": "org.gnome.Sdk",
+    "sdk-extensions": [
+        "org.freedesktop.Sdk.Extension.swift6"
+    ],
+    "command": "GTKChatGPT",
+    "finish-args": [
+        "--share=ipc",
+        "--socket=fallback-x11",
+        "--device=dri",
+        "--socket=wayland"
+    ],
+    "build-options": {
+        "append-path": "/usr/lib/sdk/swift6/bin",
+        "prepend-ld-library-path": "/usr/lib/sdk/swift6/lib"
+    },
+    "cleanup": [
+        "/include",
+        "/lib/pkgconfig",
+        "/man",
+        "/share/doc",
+        "/share/gtk-doc",
+        "/share/man",
+        "/share/pkgconfig",
+        "*.la",
+        "*.a"
+    ],
+    "modules": [
+        {
+            "name": "GTKChatGPT",
+            "builddir": true,
+            "buildsystem": "simple",
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "https://github.com/david-swift/GTKChatGPT.git",
+                    "tag": "0.2.4",
+                    "commit": "d0a52fb4acf07c5844ee54e5085a1639a0e76e5b"
+                },
+                "generated-sources.json"
+            ],
+            "build-commands": [
+                "./setup-offline.sh",
+                "swift build -c release --static-swift-stdlib --skip-update",
+                "install -Dm755 .build/release/GTKChatGPT /app/bin/GTKChatGPT",
+                "install -Dm644 data/com.alfianlosari.xca_gtk_chatgpt.metainfo.xml $DESTDIR/app/share/metainfo/com.alfianlosari.xca_gtk_chatgpt.metainfo.xml",
+                "install -Dm644 data/com.alfianlosari.xca_gtk_chatgpt.desktop $DESTDIR/app/share/applications/com.alfianlosari.xca_gtk_chatgpt.desktop",
+                "install -Dm644 data/icons/com.alfianlosari.xca_gtk_chatgpt.svg $DESTDIR/app/share/icons/hicolor/scalable/apps/com.alfianlosari.xca_gtk_chatgpt.svg",
+                "install -Dm644 data/icons/com.alfianlosari.xca_gtk_chatgpt-symbolic.svg $DESTDIR/app/share/icons/hicolor/symbolic/apps/com.alfianlosari.xca_gtk_chatgpt-symbolic.svg",
+                "install -Dm644 data/icons/set-symbolic.svg $DESTDIR/app/share/icons/hicolor/symbolic/apps/com.alfianlosari.xca_gtk_chatgpt.set-symbolic.svg",
+                "install -Dm644 data/icons/settings-symbolic.svg $DESTDIR/app/share/icons/hicolor/symbolic/apps/com.alfianlosari.xca_gtk_chatgpt.settings-symbolic.svg",
+                "install -Dm644 data/icons/mistake-symbolic.svg $DESTDIR/app/share/icons/hicolor/symbolic/apps/com.alfianlosari.xca_gtk_chatgpt.mistake-symbolic.svg",
+                "install -Dm644 data/icons/tag-outline-symbolic.svg $DESTDIR/app/share/icons/hicolor/symbolic/apps/com.alfianlosari.xca_gtk_chatgpt.tag-outline-symbolic.svg",
+                "install -Dm644 data/icons/share-symbolic.svg $DESTDIR/app/share/icons/hicolor/symbolic/apps/com.alfianlosari.xca_gtk_chatgpt.share-symbolic.svg",
+                "install -Dm644 data/icons/import-symbolic.svg $DESTDIR/app/share/icons/hicolor/symbolic/apps/com.alfianlosari.xca_gtk_chatgpt.import-symbolic.svg"
+            ]
+        }
+    ]
+}

@@ -1,5 +1,5 @@
 {
-  "originHash" : "0b2278b400728a406baedf5b6120e50e3311d72d206c22c2406ab54f87b2bb71",
+  "originHash" : "563c8dc95602505a9740b0d44197c2b4a7acd89945ee9f77e3290a7a58dedc81",
   "pins" : [
     {
       "identity" : "adwaita-swift",
@@ -24,8 +24,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/alfianlosari/ChatGPTSwift",
       "state" : {
-        "revision" : "3b2f2b6fe2ac38d4bfbcaeed8a637f22f51631b6",
-        "version" : "2.3.3"
+        "revision" : "36c3d41cf88d66088733749ca014aedc72a605f3",
+        "version" : "2.4.4"
       }
     },
     {

@@ -4,18 +4,16 @@
 import PackageDescription
 
 let package = Package(
-    name: "XCAChatGPT",
+    name: "GTKChatGPT",
     dependencies: [
         .package(url: "https://git.aparoksha.dev/aparoksha/adwaita-swift", branch: "main"),
-        // .package(url: "https://github.com/hummingbird-project/swift-websocket", from: "1.1.1"),
-        .package(url: "https://github.com/alfianlosari/ChatGPTSwift", from: "2.0.0"),
+        .package(url: "https://github.com/alfianlosari/ChatGPTSwift", from: "2.4.4"),
     ],
     targets: [
         .executableTarget(
-            name: "XCAChatGPT",
+            name: "GTKChatGPT",
             dependencies: [
                 .product(name: "Adwaita", package: "adwaita-swift"),
-                // .product(name: "WSClient", package: "swift-websocket"),
                 .product(name: "ChatGPTSwift", package: "ChatGPTSwift"),
             ])
     ]
