@@ -11,3 +11,6 @@ DerivedData/
 .swiftpm/config/registries.json
 .swiftpm/xcode/package.xcworkspace/contents.xcworkspacedata
 .netrc
+generated-sources.json
+setup-offline.sh
+repo

@@ -38,11 +38,15 @@
                 {
                     "type": "dir",
                     "path": "."
-                }
+                },
+                "generated-sources.json"
             ],
             "build-commands": [
-                "swift build -c debug --static-swift-stdlib",
-                "install -Dm755 .build/debug/GTKChatGPT /app/bin/GTKChatGPT",
+                "./setup-offline.sh",
+                "swift build -c release --static-swift-stdlib --skip-update",
+                "install -Dm755 .build/release/GTKChatGPT /app/bin/GTKChatGPT",
+                "install -d /app/bin/GPTEncoder_GPTEncoder.resources",
+                "cp -r .build/release/GPTEncoder_GPTEncoder.resources/* /app/bin/GPTEncoder_GPTEncoder.resources/",
                 "install -Dm644 data/io.github.alfianlosari.GTKChatGPT.metainfo.xml $DESTDIR/app/share/metainfo/io.github.alfianlosari.GTKChatGPT.metainfo.xml",
                 "install -Dm644 data/io.github.alfianlosari.GTKChatGPT.desktop $DESTDIR/app/share/applications/io.github.alfianlosari.GTKChatGPT.desktop",
                 "install -Dm644 data/icons/io.github.alfianlosari.GTKChatGPT.png $DESTDIR/app/share/icons/hicolor/scalable/apps/io.github.alfianlosari.GTKChatGPT.png"

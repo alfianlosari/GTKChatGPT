@@ -275,11 +275,12 @@ struct ChatListView: WindowView, @unchecked Sendable {
         guard let index = self.chatState.messages.firstIndex(where: { $0.id == message.id }) else {
             return
         }
-        Idle {
-            let promptMessage = self.chatState.messages[index - 1]
-            self.chatState.messages.remove(at: index)
-            self.chatState.messages.remove(at: index - 1)
+        let promptMessage = self.chatState.messages[index - 1]
+        self.chatState.messages.remove(at: index)
+        self.chatState.messages.remove(at: index - 1)
+        Idle(delay: Duration.seconds(0.1)) {
             self.sendMessage(text: promptMessage.text)
+            return false
         }
     }
 
