@@ -3,12 +3,11 @@
   <id>io.github.alfianlosari.GTKChatGPT</id>
 
   <name>XCA AI Chat</name>
-  <developer id="org.example">
-    <name>Developer name</name>
+  <developer id="com.alfianlosari">
+    <name>Alfian Losari</name>
   </developer>
   <summary>Chat with AI - Powered by ChatGPT API</summary>
-  <summary xml:lang="en">Chat with AI - Powered by ChatGPT API</summary>
-
+  
   <metadata_license>MIT</metadata_license>
   <project_license>MIT</project_license>
 
@@ -18,13 +17,13 @@
 
 
   <screenshots>
-    <screenshot type="default" xml:lang="en">
+    <screenshot type="default">
       <image type="source">https://raw.githubusercontent.com/alfianlosari/GTKChatGPT/main/data/tutorials/overview.png</image>
     </screenshot>
-    <screenshot xml:lang="en">
+    <screenshot>
       <image type="source">https://raw.githubusercontent.com/alfianlosari/GTKChatGPT/main/data/tutorials/conversation.png</image>
     </screenshot>
-    <screenshot xml:lang="en">
+    <screenshot>
       <image type="source">https://raw.githubusercontent.com/alfianlosari/GTKChatGPT/main/data/tutorials/settings.png</image>
     </screenshot>
   </screenshots>
