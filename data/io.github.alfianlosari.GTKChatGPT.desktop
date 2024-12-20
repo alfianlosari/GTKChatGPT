@@ -6,6 +6,6 @@ Name=XCA AI Chat
 Comment=Powered by ChatGPT API 
 Categories=Utility;Chat;GNOME;
 
-Icon=io.github.alfianlosari.gtkchatgpt
+Icon=io.github.alfianlosari.GTKChatGPT
 Exec=GTKChatGPT
 Terminal=false

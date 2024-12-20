@@ -156,10 +156,10 @@ struct ChatListView: WindowView, @unchecked Sendable {
             visible: $showAbout,
             app: "XCA AI Chat",
             developer: "Alfian Losari - Xcoding with Alfian",
-            version: "1.0",
-            icon: .default(icon: .chatMessageNew),
-            website: .init(string: "https://alfianlosari.com/"),
-            issues: .init(string: "https://alfianlosari.com")
+            version: "0.1",
+            icon: .custom(name: "io.github.alfianlosari.GTKChatGPT"),
+            website: .init(string: "https://github.com/alfianlosari/GTKChatGPT"),
+            issues: .init(string: "https://github.com/alfianlosari/GTKChatGPT/issues")
         )
         .alertDialog(
             visible: $showPreferences, heading: "Settings", body: "Bring your own OpenAI API Key"

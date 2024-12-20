@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop-application">
-  <id>io.github.alfianlosari.gtkchatgpt</id>
+  <id>io.github.alfianlosari.GTKChatGPT</id>
 
   <name>XCA AI Chat</name>
   <developer_name>Alfian Losari</developer_name>
@@ -17,13 +17,13 @@
 
   <screenshots>
     <screenshot type="default" xml:lang="en">
-      <image type="source">https://github.com/alfianlosari/GTKChatGPT/raw/main/data/tutorials/main.png</image>
+      <image type="source">https://raw.githubusercontent.com/alfianlosari/GTKChatGPT/main/data/tutorials/overview.png</image>
     </screenshot>
     <screenshot xml:lang="en">
-      <image type="source">https://github.com/alfianlosari/GTKChatGPT/raw/main/data/tutorials/conversation.png</image>
+      <image type="source">https://raw.githubusercontent.com/alfianlosari/GTKChatGPT/main/data/tutorials/conversation.png</image>
     </screenshot>
     <screenshot xml:lang="en">
-      <image type="source">https://github.com/alfianlosari/GTKChatGPT/raw/main/data/tutorials/settings.png</image>
+      <image type="source">https://raw.githubusercontent.com/alfianlosari/GTKChatGPT/main/data/tutorials/settings.png</image>
     </screenshot>
   </screenshots>
 
@@ -52,7 +52,7 @@ Whether you're brainstorming ideas, seeking answers, or exploring the capabiliti
     </p>
   </description>
 
-  <launchable type="desktop-id">io.github.alfianlosari.gtkchatgpt.desktop</launchable>
+  <launchable type="desktop-id">io.github.alfianlosari.GTKChatGPT.desktop</launchable>
 
   <releases>
     <release version="0.1.0" date="2024-12-20">
