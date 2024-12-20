@@ -3,7 +3,9 @@
   <id>io.github.alfianlosari.GTKChatGPT</id>
 
   <name>XCA AI Chat</name>
-  <developer_name>Alfian Losari</developer_name>
+  <developer id="org.example">
+    <name>Developer name</name>
+  </developer>
   <summary>Chat with AI - Powered by ChatGPT API</summary>
   <summary xml:lang="en">Chat with AI - Powered by ChatGPT API</summary>
 
@@ -64,12 +66,7 @@ Whether you're brainstorming ideas, seeking answers, or exploring the capabiliti
     </release>
   </releases>
 
-  <content_rating type="oars-1.1">
-    <rating id="oars.rating.interactive_elements">high</rating>
-    <rating id="oars.rating.network">moderate</rating>
-    <rating id="oars.rating.sensitive_content">moderate</rating>
-  </content_rating>
-
+  <content_rating type="oars-1.1"/>
   <branding>
     <color type="primary" scheme_preference="light">#99c1f1</color>
     <color type="primary" scheme_preference="dark">#2e5687</color>
