@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+
+Name=XCA AI Chat
+Comment=Powered by ChatGPT API 
+Categories=Utility;Chat;GNOME;
+
+Icon=io.github.alfianlosari.gtkchatgpt
+Exec=GTKChatGPT
+Terminal=false

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>io.github.alfianlosari.gtkchatgpt</id>
+
+  <name>XCA AI Chat</name>
+  <developer_name>Alfian Losari</developer_name>
+  <summary>Chat with AI - Powered by ChatGPT API</summary>
+  <summary xml:lang="en">Chat with an AI Assistant</summary>
+
+  <metadata_license>MIT</metadata_license>
+  <project_license>MIT</project_license>
+
+  <url type="homepage">https://github.com/alfianlosari/GTKChatGPT</url>
+  <url type="bugtracker">https://github.com/alfianlosari/GTKChatGPT/issues</url>
+  <url type="vcs-browser">https://github.com/alfianlosari/GTKChatGPT</url>
+
+
+  <screenshots>
+    <screenshot type="default" xml:lang="en">
+      <image type="source">https://github.com/alfianlosari/GTKChatGPT/raw/main/data/tutorials/main.png</image>
+    </screenshot>
+    <screenshot xml:lang="en">
+      <image type="source">https://github.com/alfianlosari/GTKChatGPT/raw/main/data/tutorials/conversation.png</image>
+    </screenshot>
+    <screenshot xml:lang="en">
+      <image type="source">https://github.com/alfianlosari/GTKChatGPT/raw/main/data/tutorials/settings.png</image>
+    </screenshot>
+  </screenshots>
+
+
+  <supports>
+    <control>pointing</control>
+    <control>keyboard</control>
+    <control>touch</control>
+  </supports>
+
+
+  <description>
+    <p>
+XCA AI Chat is a native GNOME application that lets you interact with OpenAI's ChatGPT API. Simply bring your own OpenAI API key to start a conversation. Your API key is stored locally on your machine for security.
+
+Key features include:
+    </p>
+    <ul>
+      <li>Support for multiple OpenAI models, including GPT-4 (e.g., gpt-4o, gpt-4o-mini, o1) and GPT-3.5 (e.g., gpt-3.5-turbo)</li>
+      <li>Ability to set the system prompt for tailoring conversations</li>
+      <li>Adjustable response creativity through temperature settings</li>
+      <li>Clean, intuitive user interface optimized for GNOME</li>
+    </ul>
+    <p>
+Whether you're brainstorming ideas, seeking answers, or exploring the capabilities of AI, XCA AI Chat offers flexibility and power for all your needs.
+    </p>
+  </description>
+
+  <launchable type="desktop-id">io.github.alfianlosari.gtkchatgpt.desktop</launchable>
+
+  <releases>
+    <release version="0.1.0" date="2024-12-20">
+      <description>
+        <ul>
+          <li>Initial release on Flathub</li>
+        </ul>
+      </description>
+    </release>
+  </releases>
+
+  <content_rating type="oars-1.1">
+    <rating id="oars.rating.interactive_elements">high</rating>
+    <rating id="oars.rating.network">moderate</rating>
+    <rating id="oars.rating.sensitive_content">moderate</rating>
+  </content_rating>
+
+  <branding>
+    <color type="primary" scheme_preference="light">#99c1f1</color>
+    <color type="primary" scheme_preference="dark">#2e5687</color>
+  </branding>
+
+  <categories>
+    <category>Utility</category>
+    <category>Chat</category>
+    <category>GNOME</category>
+  </categories>
+
+</component>

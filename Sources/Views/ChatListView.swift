@@ -15,6 +15,7 @@ struct ChatListView: WindowView, @unchecked Sendable {
     @State("temperature") private var temperature: Double = 0.5
 
     @State private var chatState = ChatListState()
+    @State private var showAbout = false
     @State private var showPreferences = false
     @State("apiKey") private var apiKey =
         ""
@@ -46,17 +47,18 @@ struct ChatListView: WindowView, @unchecked Sendable {
 
                             if message.state == .loading {
                                 Spinner()
-                                    .padding(8, .vertical)
+                                    .padding(16, .vertical)
                             }
 
                             if message.state == .error {
                                 Button("Retry") {
                                     self.retry(message: message)
                                 }
+                                .style("suggested-action")
                                 .insensitive(chatState.isPrompting)
                                 .frame(maxWidth: 100)
                                 .padding(16, .horizontal)
-                                .padding(8, .vertical)
+                                .padding(16, .vertical)
                                 .halign(.start)
                             }
                         }
@@ -133,6 +135,8 @@ struct ChatListView: WindowView, @unchecked Sendable {
                     MenuSection {
                         MenuButton("Preferences") { showPreferences = true }
                             .keyboardShortcut("comma".ctrl())
+                        MenuButton("About") { showAbout = true }
+
                         MenuButton("Quit", window: false) { app.quit() }
                             .keyboardShortcut("q".ctrl())
                     }
@@ -142,11 +146,21 @@ struct ChatListView: WindowView, @unchecked Sendable {
 
             }
             .headerBarTitle {
-                WindowTitle(subtitle: selectedModel, title: "XCA GTK ChatGPT")
+                WindowTitle(subtitle: "GPT Model - \(selectedModel)", title: "XCA AI Chat")
 
             }
 
         }
+
+        .aboutDialog(
+            visible: $showAbout,
+            app: "XCA AI Chat",
+            developer: "Alfian Losari - Xcoding with Alfian",
+            version: "1.0",
+            icon: .default(icon: .chatMessageNew),
+            website: .init(string: "https://alfianlosari.com/"),
+            issues: .init(string: "https://alfianlosari.com")
+        )
         .alertDialog(
             visible: $showPreferences, heading: "Settings", body: "Bring your own OpenAI API Key"
         ) {
@@ -186,14 +200,13 @@ struct ChatListView: WindowView, @unchecked Sendable {
             .frame(maxHeight: 512)
         }
         .response("Close", appearance: .suggested, role: .close) {
-            print(systemPrompt)
             Self.chatGPTAPI.updateAPIKey(apiKey)
         }
     }
 
     func sendMessage(text: String) {
         self.chatState.messages.append(
-            .init(sender: "A L", text: text, role: .user, state: .idle))
+            .init(sender: "M E", text: text, role: .user, state: .idle))
         self.chatState.messages.append(
             .init(sender: "A I", text: "", role: .assistant, state: .loading))
         self.chatState.isPrompting = true
@@ -245,7 +258,7 @@ struct ChatListView: WindowView, @unchecked Sendable {
                         } else {
                             message.text += "Error:\n\(error.localizedDescription)"
                             message.text +=
-                                "\nSomething went wrong. Please check your API key, model access, or try again later."
+                                "\n\nSomething went wrong. Please check your API key, model access, or try again later."
                         }
                         message.state = .error
                         self.chatState.messages[self.chatState.messages.count - 1] = message
@@ -254,7 +267,6 @@ struct ChatListView: WindowView, @unchecked Sendable {
                         self.scrollToBottom()
                     }
                 }
-                print(error.localizedDescription)
             }
         }
     }

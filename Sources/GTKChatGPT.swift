@@ -1,10 +1,9 @@
 import Adwaita
-import ChatGPTSwift
 import Foundation
 
 @main struct AdwaitaTemplate: App {
 
-    var app = AdwaitaApp(id: "com.alfianlosari.xca-gtk-chatgpt")
+    var app = AdwaitaApp(id: "io.github.alfianlosari.gtkchatgpt")
 
     var scene: Scene {
         Window(id: "content") { window in
