@@ -151,12 +151,14 @@ struct ChatListView: WindowView, @unchecked Sendable {
             }
 
         }
-
+        .onAppear {
+            Self.chatGPTAPI.updateAPIKey(apiKey)
+        }
         .aboutDialog(
             visible: $showAbout,
             app: "XCA AI Chat",
             developer: "Alfian Losari - Xcoding with Alfian",
-            version: "0.1",
+            version: "0.1.0",
             icon: .custom(name: "io.github.alfianlosari.GTKChatGPT"),
             website: .init(string: "https://github.com/alfianlosari/GTKChatGPT"),
             issues: .init(string: "https://github.com/alfianlosari/GTKChatGPT/issues")
@@ -294,6 +296,7 @@ struct ChatListView: WindowView, @unchecked Sendable {
             .maximized($maximized)
             .resizable(true)
             .closeShortcut()
+            .title("XCA AI Chat")
     }
 
 }
