@@ -260,7 +260,7 @@ struct ChatListView: WindowView, @unchecked Sendable {
                         } else {
                             message.text += "Error:\n\(error.localizedDescription)"
                             message.text +=
-                                "\n\nSomething went wrong. Please check your API key, model access, or try again later."
+                                "\n\nSomething went wrong. Please check your API key, billing, model access, or try again later."
                         }
                         message.state = .error
                         self.chatState.messages[self.chatState.messages.count - 1] = message
