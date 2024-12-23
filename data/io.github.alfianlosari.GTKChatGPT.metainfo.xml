@@ -56,6 +56,13 @@ Whether you're brainstorming ideas, seeking answers, or exploring the capabiliti
   <launchable type="desktop-id">io.github.alfianlosari.GTKChatGPT.desktop</launchable>
 
   <releases>
+    <release version="0.1.1" date="2024-12-23">
+      <description>
+        <ul>
+          <li>Fix API Key not getting assigned when app launch</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.1.0" date="2024-12-20">
       <description>
         <ul>
