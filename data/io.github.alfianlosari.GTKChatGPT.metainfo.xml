@@ -56,6 +56,13 @@ Whether you're brainstorming ideas, seeking answers, or exploring the capabiliti
   <launchable type="desktop-id">io.github.alfianlosari.GTKChatGPT.desktop</launchable>
 
   <releases>
+    <release version="0.1.2" date="2025-03-03">
+      <description>
+        <ul>
+          <li>Enable Text Field Editing while waiting for prompt response</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.1.1" date="2024-12-23">
       <description>
         <ul>

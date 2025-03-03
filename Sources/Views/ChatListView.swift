@@ -84,7 +84,6 @@ struct ChatListView: WindowView, @unchecked Sendable {
                         self.sendMessage(text: text)
                     }
                     .hexpand()
-                    .insensitive(chatState.isPrompting)
                     .padding(8, .trailing)
 
                 if chatState.task != nil {
@@ -158,7 +157,7 @@ struct ChatListView: WindowView, @unchecked Sendable {
             visible: $showAbout,
             app: "XCA AI Chat",
             developer: "Alfian Losari - Xcoding with Alfian",
-            version: "0.1.0",
+            version: "0.1.2",
             icon: .custom(name: "io.github.alfianlosari.GTKChatGPT"),
             website: .init(string: "https://github.com/alfianlosari/GTKChatGPT"),
             issues: .init(string: "https://github.com/alfianlosari/GTKChatGPT/issues")
